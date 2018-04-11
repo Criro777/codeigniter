@@ -1,0 +1,96 @@
+form {
+    margin-top: 30px;
+}
+
+#item, #search {
+    width: 30%;
+    display: inline-block;
+}
+
+#todoList li h3 {
+    cursor: pointer;
+}
+
+input[name = 'tag'] {
+    margin-top: 20px;
+    width: 20%;
+    display: inline-block;
+}
+
+input[name='password'], input[name='email'] {
+    margin: 0 auto;
+    width: 30%;
+}
+
+#username, #email, #password {
+    width: 30%;
+    margin: 0 auto;
+}
+
+#login {
+    margin-top: 20px;
+}
+
+.signup-form, .login-form {
+    margin-top: 15px;
+}
+
+.alert-success, .alert-danger {
+    margin: 0 auto;
+    width:45%;
+    text-align: center;
+}
+
+.image {
+    margin-top: 15px;
+}
+
+.hello {
+    margin-left: 80%;
+}
+
+.jumbotron,.head {
+    text-align: center;
+}
+
+
+.error {
+    color: red;
+}
+
+.fa-close {
+    cursor: pointer;
+}
+
+.username {
+    color: #398439;
+}
+
+.main {
+    text-align:center;
+    margin-bottom: 15px;
+}
+
+.tagList {
+    margin-top:15px;
+    font-size:20px;
+}
+
+.tagName {
+    margin-top:15px;
+    margin-left:5px;
+    padding: 0 10px 0 10px;
+    color:#60c7eb;
+    font-size:22px;
+    border: 1px solid #60c7eb;
+    border-radius:2px;
+}
+
+.tagName a {
+    text-decoration: none;
+    color:#60c7eb;
+}
+
+.panel {
+    border: 1px solid lightseagreen;
+}
