@@ -40,9 +40,10 @@ class TodoController extends CI_Controller
 
     public function editItem()
     {
-        $data['task']  = $this->input->post('value');
-        $data['id']    = $this->input->post('pk');
-        $result        = $this->todoModel->updateItem($data);
+        $data['task'] = $this->input->post('value');
+        $data['id']   = $this->input->post('pk');
+
+        $result = $this->todoModel->updateItem($data);
 
         echo $result;
     }
@@ -85,6 +86,7 @@ class TodoController extends CI_Controller
     public function deleteFile()
     {
         $data['task_id']  = $this->input->post('id');
+        $data['img_name'] = $this->input->post('filename');
         $result = $this->todoModel->deleteImage($data);
     }
 
@@ -106,8 +108,11 @@ class TodoController extends CI_Controller
     public function searchItem()
     {
         $item = $this->input->post('search');
-        $data['items'] =  $this->todoModel->searchItem($item);
-        //$data['tags']  =  $this->todoModel->getTags();
+        $data['items'] = $this->todoModel->searchItem($item);
+        foreach ($data['items'] as &$item){
+            $item['tags'] = $this->todoModel->getTags($item['id']);
+        }
+
         $this->load->view('results', $data);
     }
 
@@ -115,8 +120,11 @@ class TodoController extends CI_Controller
     {
         $id = $item = $this->input->get('id');
 
-        $data['items'] =  $this->todoModel->filterItem($id);
-        //$data['tag']   =  $this->todoModel->getTagById($id);
+        $data['items'] = $this->todoModel->filterItem($id);
+        foreach ($data['items'] as &$item){
+            $item['tags'] = $this->todoModel->getTags($item['id']);
+        }
+        $data['tag'] =  $this->todoModel->getTagById($id);
 
         $this->load->view('tags', $data);
     }

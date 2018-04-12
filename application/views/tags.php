@@ -26,7 +26,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <div class="panel-heading head">
-                    <h2><?php echo $tag ?></h2>
+                    <h2>Тег: <?php echo $tag[0]['tag_name'] ?></h2>
                 </div>
                 <div style="text-align:center; margin-bottom: 15px;" class="main">
                     <a href="/" class="btn btn-info">На главную</a>
@@ -59,11 +59,11 @@
                                     </div>
 
                                     <div id="<?php echo $item['id']?>" class="tagList">Теги:
-                                        <?php if(! empty ($tags)): ?>
-                                            <?php foreach ($tags as $tag): ?>
-                                                <?php if($tag['task_id'] === $item['id']): ?>
-                                                    <span class="tagName"><?php echo $tag['tag_name']?></span>
-                                                <?php endif; ?>
+                                        <?php if(! empty ($item['tags'])): ?>
+                                            <?php foreach ($item['tags'] as $tag): ?>
+                                                <span class="tagName">
+                                                        <a href="/filter/?id=<?php echo $tag['tag_id']?>"><?php echo $tag['tag_name']?></a>
+                                                </span>
                                             <?php endforeach; ?>
                                         <?php endif;?>
                                     </div>

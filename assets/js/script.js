@@ -18,7 +18,7 @@ $('#todoForm').on('submit', function (e) {
         data: {item : item},
         success: function (data) {
             if(data) {
-                $('#todoList').append("<li><div class='todoItem'><h2 data-pk ="+ data +" class ='todoEditable'>" + item + "</h2><input type='file' class = 'loadFile' id="+ data +" name='picture'></div><input type='text' name='tag'>&nbsp;<button class=''>Добавить тег</button></li>");
+                $('#todoList').append("<li><div class='todoItem'><h2 data-pk ="+ data +" class ='todoEditable'>" + item + "</h2><input type='file' class = 'loadFile' id="+ data +" name='picture'></div><input type='text' name='tag'>&nbsp;<button class='btn btn-primary addTag'>Добавить тег</button><div id="+ data +" class='tagList'>Теги:</div></li>");
                 editable();
             } else {
                 $('#todoList').append("<li><div class='error'>Ошибка сервера. Попробуйте позже</div></li>")
@@ -27,7 +27,7 @@ $('#todoForm').on('submit', function (e) {
     });
 });
 
-$('.loadFile').on('change', function (e) {
+$(document).on('change', '.loadFile', function (e) {
     e.preventDefault();
     var file = this.files[0];
     var node = $(this).closest( "div" );
@@ -57,7 +57,7 @@ $('.loadFile').on('change', function (e) {
     });
 });
 
-$('.addTag').on('click', function () {
+$(document).on('click', '.addTag', function () {
     var tag     = $(this).prev('input').val();
     var taskId  = $(this).closest('li').find('h2').attr('data-pk');
     var list    = $(this).closest('li').find('.tagList');
@@ -69,7 +69,6 @@ $('.addTag').on('click', function () {
         url: "/tag",
         data: {id: taskId, tag :tag},
         success: function (data) {
-            console.log(data);
             if(data){
                 var obj = JSON.parse(data);
                 list.append("<span class='tagName'><a href='/filter/?id=" + obj.tag_id+ "'>"+ obj.tag_name + "</a>");
@@ -83,10 +82,13 @@ $('.addTag').on('click', function () {
 
 $(document).on('click','.fa-close', function () {
     var id = $(this).closest('li').find('input').attr('id');
+    var filename = $(this).prev("a").attr("href");
+
     $.ajax({
         type: "POST",
         url: "/del",
-        data: {id: id}
+        data: {id: id, filename: filename}
     });
+
     $(this).parent().remove();
 });

@@ -101,6 +101,7 @@ class TodoModel extends CI_Model
 
     public function deleteImage($data)
     {
+        unlink($_SERVER['DOCUMENT_ROOT'].$data['img_name']);
         return $this->db->delete('images', ['task_id' => $data['task_id']]);
 
     }
@@ -132,6 +133,17 @@ class TodoModel extends CI_Model
         $this->db->where('tags.id', $id);
         $query = $this->db->get();
 
+
+        return $query->result_array();
+    }
+
+    public function getTagById($id)
+    {
+        $this->db->select('tag_name');
+        $this->db->from('tags');
+        $this->db->where('id', $id);
+
+        $query = $this->db->get();
 
         return $query->result_array();
     }

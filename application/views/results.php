@@ -68,11 +68,11 @@
                                     </div>
 
                                     <div id="<?php echo $item['id']?>" class="tagList">Теги:
-                                        <?php if(! empty ($tags)): ?>
-                                            <?php foreach ($tags as $tag): ?>
-                                                <?php if($tag['task_id'] === $item['id']): ?>
-                                                    <span class="tagName"><?php echo $tag['tag_name']?></span>
-                                                <?php endif; ?>
+                                        <?php if(! empty ($item['tags'])): ?>
+                                            <?php foreach ($item['tags'] as $tag): ?>
+                                                <span class="tagName">
+                                                    <a href="/filter/?id=<?php echo $tag['tag_id']?>"><?php echo $tag['tag_name']?></a>
+                                                </span>
                                             <?php endforeach; ?>
                                         <?php endif;?>
                                     </div>
